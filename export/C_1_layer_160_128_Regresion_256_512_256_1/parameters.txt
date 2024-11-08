@@ -1,0 +1,37 @@
+device = cpu
+seed = 33927
+write to ../export/05151420_33927
+batch_size= 256
+epoch = 30
+Scale target= True
+Scale inputs= False
+init_weights = Falsedata base=pdbbind2016
+data_path=../data/pdbbind2016
+model: 
+C_Net(
+  (embed_smile): Embedding(65, 128)
+  (embed_prot): Embedding(26, 128)
+  (smiles): Sequential(
+    (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (1): ReLU()
+    (2): AdaptiveMaxPool1d(output_size=1)
+  )
+  (proteins): Sequential(
+    (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (1): ReLU()
+    (2): AdaptiveMaxPool1d(output_size=1)
+  )
+  (predict): Sequential(
+    (0): Linear(in_features=256, out_features=512, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.2, inplace=False)
+    (3): Linear(in_features=512, out_features=256, bias=True)
+    (4): ReLU()
+    (5): Dropout(p=0.2, inplace=False)
+    (6): Linear(in_features=256, out_features=1, bias=True)
+  )
+)
+max_seq_len=1000
+max_smi_len=160
+best epoch=24
+time used=0:51:53.888217
