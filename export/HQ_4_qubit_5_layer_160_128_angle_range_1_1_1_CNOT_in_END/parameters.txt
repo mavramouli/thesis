@@ -1,0 +1,45 @@
+device = cpu
+seed = 33927
+write to ../export/05111847_33927
+batch_size= 256
+epoch = 30
+Scale target= True
+Scale inputs= False
+init_weights = Falsedata base=pdbbind2016
+data_path=../data/pdbbind2016
+model: 
+HQ_Net(
+  (embed_smile): Embedding(65, 128)
+  (embed_prot): Embedding(26, 128)
+  (smiles): Sequential(
+    (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (1): ReLU()
+    (2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(2,), dilation=(2,))
+    (3): ReLU()
+    (4): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(4,), dilation=(4,))
+    (5): ReLU()
+    (6): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(8,), dilation=(8,))
+    (7): ReLU()
+    (8): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(16,), dilation=(16,))
+    (9): Sigmoid()
+    (10): AdaptiveMaxPool1d(output_size=1)
+  )
+  (proteins): Sequential(
+    (0): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(1,))
+    (1): ReLU()
+    (2): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(2,), dilation=(2,))
+    (3): ReLU()
+    (4): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(4,), dilation=(4,))
+    (5): ReLU()
+    (6): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(8,), dilation=(8,))
+    (7): ReLU()
+    (8): Conv1d(128, 128, kernel_size=(3,), stride=(1,), padding=(16,), dilation=(16,))
+    (9): Sigmoid()
+    (10): AdaptiveMaxPool1d(output_size=1)
+  )
+  (predict_q): <Quantum Torch Layer: func=circuit_angle_qml>
+)
+max_seq_len=1000
+max_smi_len=160
+best epoch=28
+time used=4:37:57.012041
